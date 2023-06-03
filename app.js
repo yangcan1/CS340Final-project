@@ -141,7 +141,7 @@ app.post('/addCar', function(req, res)
     //}
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Car (id, price, brand, model, year, color) VALUES (${data['price']}, '${data['price']}', '${data['brand']}', '${data['model']}', ${data['year']}, '${data['color']}')`;
+    query1 = `INSERT INTO Car (id, price, brand, model, year, color) VALUES (${data['id']}, '${data['price']}', '${data['brand']}', '${data['model']}', ${data['year']}, '${data['color']}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
