@@ -8,12 +8,12 @@ addPersonForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputid = document.getElementById("input-id");
-    let inputprice = document.getElementById("input-price");
-    let inputbrand = document.getElementById("input-brand");
-    let inputmodel = document.getElementById("input-model");
-    let inputyear = document.getElementById("input-year");
-    let inputcolor = document.getElementById("input-color");
+    let inputid = document.getElementById("id");
+    let inputprice = document.getElementById("price");
+    let inputbrand = document.getElementById("brand");
+    let inputmodel = document.getElementById("model");
+    let inputyear = document.getElementById("year");
+    let inputcolor = document.getElementById("color");
 
     // Get the values from the form fields
     let idValue = inputid.value;
