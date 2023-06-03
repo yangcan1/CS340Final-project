@@ -1,0 +1,39 @@
+<body>
+    <h1> Cars </h1>
+    <nav>
+        <a href="/">index</a>
+        <a href="/Car">Car</a>
+        <a href="/Customer">Customer</a>
+        <a href="/Employee">Employee</a>
+        <a href="/Invoice">Invoice</a>
+        <a href="/Waitlist">Waitlist</a>
+  </nav>
+    <div id="browse" style="display: block">
+
+        </div> <!-- browse -->
+        <p>&nbsp;</p>
+
+        <div id="insert" style="display: block">
+            <form id="addUser">
+                <legend><strong>Add Car</strong></legend>
+                  <fieldset class="fields">
+                    <label> id </label> <input type="text" name="id">
+                    <label> price </label> <input type="text" name="price">
+                    <label> brand </label> <input type="text" name="brand">
+                    <label> model </label> <input type="text" name="model">
+                    <label> year </label> <input type="text" name="year">
+                    <label> color </label> <input type="text" name="color">
+
+                </fieldset>
+                  <input class="btn" type="submit" id="addCar" value="Add a Car">
+                  <input class="btn" type="button" value="cancel">
+            </form> <!--add new planet-->
+        </div><!-- insert -->
+
+        <p>&nbsp;</p>
+        
+        <p><strong>Browse Cars</strong></p>
+        {{>table}}
+
+
+</body>

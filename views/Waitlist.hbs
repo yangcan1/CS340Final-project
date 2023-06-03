@@ -1,0 +1,33 @@
+<body>
+    <h1> Waitlist </h1>
+    <nav>
+      <a href="/">Home</a>
+        <a href="/Car">Car</a>
+        <a href="/Customer">Customer</a>
+        <a href="/Employee">Employee</a>
+        <a href="/Invoice">Invoice</a>
+        <a href="/Waitlist">Waitlist</a>
+    </nav>
+    <div id="browse" style="display: block">
+        
+        <p>&nbsp;</p>
+
+        </div> <!-- browse -->
+        <div id="insert" style="display: block">
+            <form id="addWaitlist">
+                <legend><strong>Add Waitlist<strong></legend>
+                  <fieldset class="fields">
+                    <label> c_id </label> <input type="text" name="cID">
+                    <label> car_id </label> <input type="text" name="carID">
+                    <label> date_add </label> <input type="text" name="dateAdd">
+                </fieldset>
+                  <input class="btn" type="submit" id="addWaitlist" value="Add a Waitlist">
+                  <input class="btn" type="button" value="cancel">
+            </form> <!--add new planet-->
+        </div><!-- insert -->
+        
+        <p>&nbsp;</p>
+
+        <!-- First Block -->
+        <p><strong>Browse Invoice</strong></p>
+        {{>table}}

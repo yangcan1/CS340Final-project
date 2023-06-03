@@ -1,0 +1,44 @@
+
+<body>
+    <h1> Customer </h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/Car">Car</a>
+        <a href="/Customer">Customer</a>
+        <a href="/Employee">Employee</a>
+        <a href="/Invoice">Invoice</a>
+        <a href="/Waitlist">Waitlist</a>
+    </nav>
+    <div id="browse" style="display: block">
+       
+        <p>&nbsp;</p>
+
+        </div> <!-- browse -->
+        <div id="insert" style="display: block">
+            <form id="addUser">
+                <legend><strong>Add Customer</strong></legend>
+                  <fieldset class="fields">
+                    <label> id </label> <input type="text" name="id">
+                    <label> first_name </label> <input type="text" name="fname">
+                    <label> last_name </label> <input type="text" name="lname">
+                    <label> street </label> <input type="text" name="street">
+                    <label> zip </label> <input type="text" name="zip">
+                    <label> state </label> <input type="text" name="state">
+                    <label> city </label> <input type="text" name="city">
+                    <label> phone </label> <input type="text" name="phone">
+                    <label> email </label> <input type="text" name="email">
+
+                </fieldset>
+                  <input class="btn" type="submit" id="addCustomer" value="Add a Customer">
+                  <input class="btn" type="button" value="cancel">
+            </form> <!--add new planet-->
+    </div><!-- insert -->
+        
+        <p>&nbsp;</p>
+
+ <!-- First Block -->
+        <p><strong>Browse Customer</strong></p>
+        
+        {{>table}}
+        <p>&nbsp;</p>
+        

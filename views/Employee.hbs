@@ -1,0 +1,36 @@
+<body>
+    <h1> Employee </h1>
+    <nav>
+      <a href="/">Home</a>
+        <a href="/Car">Car</a>
+        <a href="/Customer">Customer</a>
+        <a href="/Employee">Employee</a>
+        <a href="/Invoice">Invoice</a>
+        <a href="/Waitlist">Waitlist</a>
+    </nav>
+
+    <div id="browse" style="display: block">
+        <!-- First Block -->
+        
+        <p>&nbsp;</p>
+
+        </div> <!-- browse -->
+        <div id="insert" style="display: block">
+            <form id="addEmployee">
+                <legend><strong>Add Employee</strong></legend>
+                  <fieldset class="fields">
+                    <label> id </label> <input type="text" name="id">
+                    <label> first_name </label> <input type="text" name="fname">
+                    <label> last_name </label> <input type="text" name="lname">
+                    <label> sales </label> <input type="text" name="sales">
+                </fieldset>
+                  <input class="btn" type="submit" id="addEmployee" value="Add a Employee">
+                  <input class="btn" type="button" value="cancel">
+            </form> <!--add new planet-->
+        </div><!-- insert -->
+
+        <p>&nbsp;</p>
+        
+        <p><strong>Browse Employee</strong></p>
+        
+        {{>table}}

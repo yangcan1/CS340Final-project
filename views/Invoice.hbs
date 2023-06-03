@@ -1,0 +1,36 @@
+<body>
+    <h1> Invoice </h1>
+    <nav>
+      <a href="/">Home</a>
+        <a href="/Car">Car</a>
+        <a href="/Customer">Customer</a>
+        <a href="/Employee">Employee</a>
+        <a href="/Invoice">Invoice</a>
+        <a href="/Waitlist">Waitlist</a>
+    </nav>
+
+    <div id="browse" style="display: block">
+        
+        
+        <p>&nbsp;</p>
+
+        </div> <!-- browse -->
+        <div id="insert" style="display: block">
+            <form id="addUser">
+                <legend><strong>Add Invoice</strong></legend>
+                  <fieldset class="fields">
+                    <label> id </label> <input type="text" name="id">
+                    <label> date_sale </label> <input type="text" name="dateSale">
+                    <label> c_id </label> <input type="text" name="cID">
+                    <label> car_id </label> <input type="text" name="carID">
+                    <label> e_id </label> <input type="text" name="eID">
+                </fieldset>
+                  <input class="btn" type="submit" id="addInvoice" value="Add a Invoice">
+                  <input class="btn" type="button" value="cancel">
+            </form> <!--add new planet-->
+        </div><!-- insert -->
+        
+        <p>&nbsp;</p>
+        <!-- First Block -->
+        <p><strong>Browse Invoice</strong></p>
+        {{>table}}

@@ -1,0 +1,23 @@
+<table border="1", cellpadding="5">
+    <thead>
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            {{#each this}}
+            <td>{{this}}</td>
+            {{/each}}
+        <td><a href="#">Update</a></td>
+        <td><a href="#">Delete</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
