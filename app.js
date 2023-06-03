@@ -122,26 +122,26 @@ app.get('/Waitlist', function(req, res) {
 });
 
 
-app.post('/add-car-form', function(req, res) 
+app.post('/addCar', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
     let id = parseInt(data.id);
 
-    if (isNaN(id))
-    {
-        id = 'NULL'
-    }
+    //if (isNaN(id))
+    //{
+    //    id = 'NULL'
+    //}
 
-    let year = parseInt(data.year);
-    if (isNaN(year))
-    {
-        year = 'NULL'
-    }
+    //let year = parseInt(data.year);
+    //if (isNaN(year))
+    //{
+    //    year = 'NULL'
+    //}
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Car (id, price, brand, model, year, color) VALUES (${id}, '${data['price']}', '${data['brand']}', '${data[model]}', ${year}, '${data[color]}')`;
+    query1 = `INSERT INTO Car (id, price, brand, model, year, color) VALUES (${data['price']}, '${data['price']}', '${data['brand']}', '${data['model']}', ${data['year']}, '${data['color']}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -153,7 +153,7 @@ app.post('/add-car-form', function(req, res)
         }
         else
         {
-            res.redirect('/');
+            res.redirect('/Car');
         }
     })
 });
