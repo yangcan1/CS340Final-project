@@ -99,6 +99,42 @@ app.post('/addCar', function(req, res)
     })
 });
 
+app.delete('/deleteCar-ajax/', function(req,res,next){                                                                
+    let data = req.body;
+    let carID = parseInt(data.id);
+    let deleteInvoice = `DELETE FROM Invoice WHERE car_id = ?`;
+    //let deleteWaitlist = `DELETE FROM Waitlist where WHERE car_id = ?`;
+    let deleteCar= `DELETE FROM Car WHERE id = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteInvoice, [carID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+              else {
+                //db.pool.query(deleteWaitlist, [carID], function(error, rows, fields){
+                //    if(error) {
+                //        console.log(error);
+                //        res.sendStatus(400);
+                //    }
+                //    else {
+                        db.pool.query(deleteCar, [carID], function(error, rows, fields) {
+                            if (error) {
+                                console.log(error);
+                                res.sendStatus(400);
+                            } 
+                            else {
+                                res.sendStatus(204);
+                            }
+                        })
+                    //}
+                //})
+              }
+  })});
 
 app.get('*', function (req, res) {
     res.status(404).render('404')

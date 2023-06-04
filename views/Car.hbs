@@ -12,7 +12,6 @@
 
         </div> <!-- browse -->
         <p>&nbsp;</p>
-
         <div id="insert" style="display: block">
             <!--<form id="addCar"> -->
             <form id="addCar" method="POST" action="/addCar">
@@ -30,11 +29,10 @@
                   <input class="btn" type="button" value="cancel">
             </form> <!--add new planet-->
         </div><!-- insert -->
-
         <p>&nbsp;</p>
         
         <p><strong>Browse Cars</strong></p>
-        {{>table}}
+        {{>table id="car-table"}}
 
 
 </body>
