@@ -1,3 +1,5 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+{{!-- Create a table --}}
 <table border="1", cellpadding="5">
     <thead>
         <tr>
@@ -8,6 +10,8 @@
             {{/each}}
         </tr>
     </thead>
+
+    {{!-- Body section --}}
     <tbody>
         {{#each data}}
         <tr>
@@ -15,9 +19,10 @@
             <td>{{this}}</td>
             {{/each}}
         <td><a href="#">Update</a></td>
-        <td><a href="#">Delete</a></td>
+        <td><a onclick="deleteCar({{this.id}})" href="#">Delete</a></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_car.js"></script>
 

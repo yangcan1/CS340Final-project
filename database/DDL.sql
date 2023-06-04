@@ -15,7 +15,7 @@ CREATE TABLE Customer (
 	phone varchar(20) default NULL,
 	email varchar(255) default NULL,
 	PRIMARY KEY (id)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 
 CREATE TABLE Car (
 	id int NOT NULL AUTO_INCREMENT UNIQUE,
@@ -25,7 +25,7 @@ CREATE TABLE Car (
 	year int NOT NULL,
 	color varchar(255) NOT NULL, 
     PRIMARY KEY (id)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
 
 CREATE TABLE Employee (
 	id int NOT NULL AUTO_INCREMENT UNIQUE,
@@ -33,7 +33,7 @@ CREATE TABLE Employee (
 	last_name varchar(255) NOT NULL,
 	sales int NULL,
     PRIMARY KEY (id)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 CREATE TABLE Invoice (
 	id int NOT NULL AUTO_INCREMENT UNIQUE,
@@ -45,7 +45,7 @@ CREATE TABLE Invoice (
 	FOREIGN KEY(car_id) REFERENCES Car(id),
 	FOREIGN KEY(e_id) REFERENCES Employee(id),
     PRIMARY KEY(id)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 CREATE TABLE Waitlist (
 	c_id int, 
