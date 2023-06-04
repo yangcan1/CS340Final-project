@@ -44,47 +44,6 @@ app.get('/:i', function(req, res, next) {
     } else next()
 })
 
-
-// render Car page
-// app.get('/Car', function(req, res) {
-//     let query1 = "SELECT * FROM " + "Car;";               // Define our query
-//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
-//         res.render('Car', {data: rows});                  // Render the index.hbs file, and also send the renderer
-//     })   
-// });
-// // render Customer page
-// app.get('/Customer', function(req, res) {
-//     let query1 = "SELECT * FROM Customer;";               // Define our query
-//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
-//         res.render('Customer', {data: rows});                  // Render the index.hbs file, and also send the renderer
-//     })   
-// });
-// // render Employee page
-// app.get('/Employee', function(req, res) {
-//     let query1 = "SELECT * FROM Employee;";               // Define our query
-//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
-
-//         res.render('Employee', {data: rows});                  // Render the index.hbs file, and also send the renderer
-//     })   
-// });
-// // render Invoice page
-// app.get('/Invoice', function(req, res) {
-//     let query1 = "SELECT * FROM Invoice;";               // Define our query
-//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
-
-//         res.render('Invoice', {data: rows});                  // Render the index.hbs file, and also send the renderer
-//     })   
-// });
-// // render Waitlist page
-// app.get('/Waitlist', function(req, res) {
-//     let query1 = "SELECT * FROM Waitlist;";               // Define our query
-//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
-
-//         res.render('Waitlist', {data: rows});                  // Render the index.hbs file, and also send the renderer
-//     })   
-// });
-
-
 app.post('/addCar', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
@@ -106,6 +65,31 @@ app.post('/addCar', function(req, res)
         else
         {
             res.redirect('/Car');
+        }
+    })
+});
+
+app.post('/addCustomer', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    let id = parseInt(data.id);
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Customer (first_name, last_name, street, zip, state, city, phone, email) VALUES ('${data['first_name']}', '${data['last_name']}', '${data['street']}', ${data['zip']}, '${data['state']}', '${data['city']}', '${data['phone']}', '${data['email']}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.redirect('/Customer');
         }
     })
 });
