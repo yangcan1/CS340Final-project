@@ -111,23 +111,15 @@ app.delete('/deleteCar-ajax/', function(req,res,next){
               res.sendStatus(400);
               }
               else {
-                //db.pool.query(deleteWaitlist, [carID], function(error, rows, fields){
-                //    if(error) {
-                //        console.log(error);
-                //        res.sendStatus(400);
-                //    }
-                //    else {
-                        db.pool.query(deleteCar, [carID], function(error, rows, fields) {
-                            if (error) {
-                                console.log(error);
-                                res.sendStatus(400);
-                            } 
-                            else {
-                                res.sendStatus(204);
-                            }
-                        })
-                    //}
-                //})
+                db.pool.query(deleteCar, [carID], function(error, rows, fields) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    } 
+                    else {
+                        res.sendStatus(204);
+                    }
+                })
               }
   })});
 
