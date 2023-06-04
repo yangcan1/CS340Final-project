@@ -34,44 +34,55 @@ app.get('/', function(req, res)
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query
 
+app.get('/:i', function(req, res, next) {
+    var i = req.params.i
+    if (i == "Car" || i == "Customer" || i == "Employee" || i == "Invoice" || i == "Waitlist") {
+        let query1 = "SELECT * FROM " + i;
+        db.pool.query(query1, function(error, rows, fields) {
+            res.render(i, {data: rows})
+        }) 
+    } else next()
+})
+
+
 // render Car page
-app.get('/Car', function(req, res) {
-    let query1 = "SELECT * FROM Car;";               // Define our query
-    db.pool.query(query1, function(error, rows, fields){    // Execute the query
-        res.render('Car', {data: rows});                  // Render the index.hbs file, and also send the renderer
-    })   
-});
-// render Customer page
-app.get('/Customer', function(req, res) {
-    let query1 = "SELECT * FROM Customer;";               // Define our query
-    db.pool.query(query1, function(error, rows, fields){    // Execute the query
-        res.render('Customer', {data: rows});                  // Render the index.hbs file, and also send the renderer
-    })   
-});
-// render Employee page
-app.get('/Employee', function(req, res) {
-    let query1 = "SELECT * FROM Employee;";               // Define our query
-    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+// app.get('/Car', function(req, res) {
+//     let query1 = "SELECT * FROM " + "Car;";               // Define our query
+//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
+//         res.render('Car', {data: rows});                  // Render the index.hbs file, and also send the renderer
+//     })   
+// });
+// // render Customer page
+// app.get('/Customer', function(req, res) {
+//     let query1 = "SELECT * FROM Customer;";               // Define our query
+//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
+//         res.render('Customer', {data: rows});                  // Render the index.hbs file, and also send the renderer
+//     })   
+// });
+// // render Employee page
+// app.get('/Employee', function(req, res) {
+//     let query1 = "SELECT * FROM Employee;";               // Define our query
+//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-        res.render('Employee', {data: rows});                  // Render the index.hbs file, and also send the renderer
-    })   
-});
-// render Invoice page
-app.get('/Invoice', function(req, res) {
-    let query1 = "SELECT * FROM Invoice;";               // Define our query
-    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+//         res.render('Employee', {data: rows});                  // Render the index.hbs file, and also send the renderer
+//     })   
+// });
+// // render Invoice page
+// app.get('/Invoice', function(req, res) {
+//     let query1 = "SELECT * FROM Invoice;";               // Define our query
+//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-        res.render('Invoice', {data: rows});                  // Render the index.hbs file, and also send the renderer
-    })   
-});
-// render Waitlist page
-app.get('/Waitlist', function(req, res) {
-    let query1 = "SELECT * FROM Waitlist;";               // Define our query
-    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+//         res.render('Invoice', {data: rows});                  // Render the index.hbs file, and also send the renderer
+//     })   
+// });
+// // render Waitlist page
+// app.get('/Waitlist', function(req, res) {
+//     let query1 = "SELECT * FROM Waitlist;";               // Define our query
+//     db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-        res.render('Waitlist', {data: rows});                  // Render the index.hbs file, and also send the renderer
-    })   
-});
+//         res.render('Waitlist', {data: rows});                  // Render the index.hbs file, and also send the renderer
+//     })   
+// });
 
 
 app.post('/addCar', function(req, res) 
