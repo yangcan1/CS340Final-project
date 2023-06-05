@@ -27,7 +27,34 @@
                 </fieldset>
                   <input class="btn" type="submit" id="addCar" value="Add a Car">
                   <input class="btn" type="button" value="cancel">
-            </form> <!--add new planet-->
+            </form> 
+        </div><!-- insert -->
+        <p>&nbsp;</p>
+
+        <!--update car -->
+        <div id="insert" style="display: block">
+            <!--<form id="addCar"> -->
+            <form id="updateCar">
+                <legend><strong>Update Car</strong></legend>
+                  <fieldset class="fields">
+                    <label for="select-id"> id </label> 
+                    <select name="select-id" id="mySelect">
+                      <option value="test">Select a car ID</option>
+                      {{#each data}}
+                      <option value="{{this.id}}">{{this.id}}</option>
+                      {{/each}}
+                    </select>
+                    <label> price </label> <input type="number" name="price">
+                    <label> brand </label> <input type="text" name="brand">
+                    <label> model </label> <input type="text" name="model">
+                    <label> year </label> <input type="number" name="year">
+                    <label> color </label> <input type="text" name="color">
+
+                </fieldset>
+                  <input class="btn" type="submit" id="updateCar" value="Update Car">
+                  <input class="btn" type="button" value="cancel">
+            </form> 
+            <script src="./js/update_car.js"></script>
         </div><!-- insert -->
         <p>&nbsp;</p>
         

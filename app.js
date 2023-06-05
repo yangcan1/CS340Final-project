@@ -136,6 +136,41 @@ app.delete('/deleteCar-ajax/', function(req,res,next){
               }
   })});
 
+  app.put('/updateCar-ajax', function(req,res,next){                                   
+    let data = req.body;
+  
+    //let homeworld = parseInt(data.homeworld);
+    //let Car = parseInt(data.fullname)``;
+  
+    queryUpdateCar = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
+    selectCar = `SELECT * FROM Car WHERE id = ?`
+  
+          // Run the 1st query
+          db.pool.query(queryUpdateWorld, [homeworld, Car], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              // If there was no error, we run our second query and return that data so we can use it to update the people's
+              // table on the front-end
+              else
+              {
+                  // Run the second query
+                  db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
+          
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.send(rows);
+                      }
+                  })
+              }
+  })});
+
 app.get('*', function (req, res) {
     res.status(404).render('404')
   });

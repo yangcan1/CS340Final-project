@@ -16,33 +16,33 @@ function deleteCar(carID) {
 	});
   }
   
-  //  code for deletecar using regular javascript/xhttp
-   function deletecar(carID) {
-       // Put our data we want to send in a javascript object
-       let data = {
-           id: carID
-       };
+  ////  code for deletecar using regular javascript/xhttp
+  // function deletecar(carID) {
+  //     // Put our data we want to send in a javascript object
+  //     let data = {
+  //         id: carID
+  //     };
 	  
-       // Setup our AJAX request
-       var xhttp = new XMLHttpRequest();
-       xhttp.open("DELETE", "/deleteCar-ajax", true);
-       xhttp.setRequestHeader("Content-type", "application/json");
+  //     // Setup our AJAX request
+  //     var xhttp = new XMLHttpRequest();
+  //     xhttp.open("DELETE", "/deleteCar-ajax", true);
+  //     xhttp.setRequestHeader("Content-type", "application/json");
   
-       // Tell our AJAX request how to resolve
-       xhttp.onreadystatechange = () => {
-           if (xhttp.readyState == 4 && xhttp.status == 204) {
+  //     // Tell our AJAX request how to resolve
+  //     xhttp.onreadystatechange = () => {
+  //         if (xhttp.readyState == 4 && xhttp.status == 204) {
   
-               // Add the new data to the table
-               deleteRow(carID);
+  //             // Add the new data to the table
+  //             deleteRow(carID);
   
-           }
-           else if (xhttp.readyState == 4 && xhttp.status != 204) {
-               console.log("There was an error with the input.")
-           }
-       }
-       // Send the request and wait for the response
-       xhttp.send(JSON.stringify(data));
-   }
+  //         }
+  //         else if (xhttp.readyState == 4 && xhttp.status != 204) {
+  //             console.log("There was an error with the input.")
+  //         }
+  //     }
+  //     // Send the request and wait for the response
+  //     xhttp.send(JSON.stringify(data));
+  // }
   
   
   function deleteRow(carID){
