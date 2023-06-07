@@ -34,27 +34,31 @@
         </div>
         <p>&nbsp;</p>
 
+        {{!-- Update --}}
+        <form id="update-customer-form-ajax">
 
-        <!--update car -->
-        <form id="updateCar">
-            <legend><strong>Update Car</strong></legend>
-                <fieldset class="fields">
-                <label for="select-id"> id </label> 
-                <select name="select-id" id="mySelect">
-                    <option value="test">Select a car ID</option>
-                    {{#each data}}
-                    <option value="{{this.id}}">{{this.id}}</option>
-                    {{/each}}
-                </select>
-                <label> price </label> <input type="number" name="price">
-                <label> brand </label> <input type="text" name="brand">
-                <label> model </label> <input type="text" name="model">
-                <label> year </label> <input type="number" name="year">
-                <label> color </label> <input type="text" name="color">
+            <label for="input-fullname">Full name: </label>
+            <select name="input-fullname" id="mySelect">
+                <option value="test">Select a Person</option>
+                {{#each data}}
+                <option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
+                {{/each}}
+            </select>
 
-            </fieldset>
-                <input class="btn" type="submit" id="updateCar" value="Update Car">
-        </form> 
+            <label for="input-homeworld">Homeworld: </label>
+            <select name="input-homeworld" id="input-homeworld-update">
+                <option>Select a Planet</option>
+                {{#each planets}}
+                <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+            <input type="submit">
+
+        </form>
+
+        <script src="./js/update_person.js"></script>
+
+        
 
         <p>&nbsp;</p>
 

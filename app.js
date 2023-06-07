@@ -130,6 +130,7 @@ app.delete('/delete-car-ajax/', function(req, res, next) {
     let data = req.body;
     let carID = parseInt(data.id);
     let deleteCar = `DELETE FROM Car WHERE id = ?`;
+    let deleteInvoice
 
     db.pool.query(deleteCar, [carID], function(error, rows, fields) {
         if (error) {
@@ -173,7 +174,12 @@ app.delete('/delete-employee-ajax/', function(req, res, next) {
     });
 });
 
-  app.put('/updateCar-ajax', function(req,res,next){                                   
+/*
+    Update ROUTES
+*/
+
+// update Car
+app.put('/updateCar-ajax', function(req,res,next){                                   
     let data = req.body;
   
     //let homeworld = parseInt(data.homeworld);
@@ -207,6 +213,128 @@ app.delete('/delete-employee-ajax/', function(req, res, next) {
                   })
               }
   })});
+
+// update customer
+  app.post('/update-customer', function (req, res, next) {
+    let data = req.body;
+    let ID = parseInt(data.id_select);
+    let firstName = data.new_first_name;
+    let lastName = data.new_last_name;
+    let email = data.new_email;
+    let phone = data.new_phone;
+    let streetAddress = data.new_street_address;
+    let city = data.new_city;
+    let state = data.new_state;
+    let zip = data.new_zip;
+    let dentistID = data.new_dentist_id;
+
+    let queryUpdateFirstName = `UPDATE Patients SET first_name = ? WHERE Patients.patient_ID = ?`;
+    let queryUpdateLastName = `UPDATE Patients SET last_name = ? WHERE Patients.patient_ID = ?`;
+    let queryUpdatePhone = `UPDATE Patients SET phone = ? WHERE Patients.patient_ID = ?`;
+    let queryUpdateEmail = `UPDATE Patients SET email = ? WHERE Patients.patient_ID = ?`;
+    let queryUpdateStreetAddress = `UPDATE Patients SET street_address = ? WHERE Patients.patient_ID = ?`;
+    let queryUpdateCity = `UPDATE Patients SET city = ? WHERE Patients.patient_ID = ?`;
+    let queryUpdateState = `UPDATE Patients SET state = ? WHERE Patients.patient_ID = ?`;
+    let queryUpdateZip = `UPDATE Patients SET zip = ? WHERE Patients.patient_ID = ?`;
+    let queryUpdateDentistID = `UPDATE Patients SET dentist_ID = ? WHERE Patients.patient_ID = ?`;
+
+    // User hasn't selected a dentist to modify but clicked Submit.
+    // Code 204, shouldn't do anything or go anywhere
+    if (Number.isNaN(patientID)) {
+        res.sendStatus(204)
+    }
+
+    else {
+        // Run the 1st query
+        if (firstName != "") {
+            db.pool.query(queryUpdateFirstName, [firstName, patientID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error)
+                    res.sendStatus(400);
+                }
+            })
+        }
+        // Run the 2nd query
+        if (lastName != "") {
+            db.pool.query(queryUpdateLastName, [lastName, patientID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400)
+                }
+            })
+        }
+        // Run the third query
+        if (phone != "") {
+            db.pool.query(queryUpdatePhone, [phone, patientID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+            })
+        }
+        // Run the fourth query
+        if (email != "") {
+            db.pool.query(queryUpdateEmail, [email, patientID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400)
+                }
+            })
+        }
+
+        // Run the fifth query
+        if (streetAddress != "") {
+            db.pool.query(queryUpdateStreetAddress, [streetAddress, patientID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400)
+                }
+            })
+        }
+
+        // Run the sixth query
+        if (city != "") {
+            db.pool.query(queryUpdateCity, [city, patientID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400)
+                }
+            })
+        }
+
+        // Run the seventh query
+        if (state != "") {
+            db.pool.query(queryUpdateState, [state, patientID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400)
+                }
+            })
+        }
+
+        // Run the eighth query
+        if (zip != "") {
+            db.pool.query(queryUpdateZip, [zip, patientID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400)
+                }
+            })
+        }
+
+        // Run the ninth query
+        if (dentistID != "") {
+            db.pool.query(queryUpdateDentistID, [dentistID, patientID], function (error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400)
+                }
+            })
+        }
+
+        return res.redirect("/patients")
+    }
+})
 
 app.get('*', function (req, res) {
     res.status(404).render('404')
