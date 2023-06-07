@@ -28,10 +28,10 @@
 
                 </fieldset>
                   <input class="btn" type="submit" id="addCar" value="Add a Car">
-                  <input class="btn" type="button" value="cancel">
             </form> 
         </div><!-- insert -->
         <p>&nbsp;</p>
+
 
         <!--update car -->
         <div id="insert" style="display: block">
@@ -54,14 +54,39 @@
 
                 </fieldset>
                   <input class="btn" type="submit" id="updateCar" value="Update Car">
-                  <input class="btn" type="button" value="cancel">
             </form> 
             <script src="./js/update_car.js"></script>
         </div><!-- insert -->
         <p>&nbsp;</p>
         
         <p><strong>Browse Cars</strong></p>
-        {{>table id="car-table"}}
+
+        {{!-- Create a table --}}
+        <table border="1", cellpadding="5" id = "car-table">
+            <thead>
+                <tr>
+                    {{#each data.[0]}}
+                    <th>
+                        {{@key}}
+                    </th>
+                    {{/each}}
+                </tr>
+            </thead>
+
+            {{!-- Body section --}}
+            <tbody>
+                {{#each data}}
+                <tr data-value={{this.id}}>
+                    {{#each this}}
+                    <td>{{this}}</td>
+                    {{/each}}
+                <td><a onclick="Delete({{this.id}})" href="#">Delete</a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+
 
 
 </body>

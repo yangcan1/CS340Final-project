@@ -11,10 +11,9 @@
         <a href="/Waitlist">Waitlist</a>
     </nav>
     <div id="browse" style="display: block">
-       
         <p>&nbsp;</p>
 
-        </div> <!-- browse -->
+        </div> 
         <div id="insert" style="display: block">
             <form id="addCustomer" method="POST" action="/addCustomer">
                 <legend><strong>Add Customer</strong></legend>
@@ -31,16 +30,62 @@
 
                 </fieldset>
                   <input class="btn" type="submit" id="addCustomer" value="Add a Customer">
-                  <input class="btn" type="button" value="cancel">
             </form> <!--add new planet-->
-    </div><!-- insert -->
-        
+        </div>
         <p>&nbsp;</p>
 
- <!-- First Block -->
-        <p><strong>Browse Customer</strong></p>
-        
-        {{>table id="customer-table"}}
+
+        <!--update car -->
+        <form id="updateCar">
+            <legend><strong>Update Car</strong></legend>
+                <fieldset class="fields">
+                <label for="select-id"> id </label> 
+                <select name="select-id" id="mySelect">
+                    <option value="test">Select a car ID</option>
+                    {{#each data}}
+                    <option value="{{this.id}}">{{this.id}}</option>
+                    {{/each}}
+                </select>
+                <label> price </label> <input type="number" name="price">
+                <label> brand </label> <input type="text" name="brand">
+                <label> model </label> <input type="text" name="model">
+                <label> year </label> <input type="number" name="year">
+                <label> color </label> <input type="text" name="color">
+
+            </fieldset>
+                <input class="btn" type="submit" id="updateCar" value="Update Car">
+        </form> 
+
         <p>&nbsp;</p>
-        
+
+
+    <p><strong>Browse Customer</strong></p>
+
+    {{!-- Create a table --}}
+    <table border="1", cellpadding="5" id = "customer-table">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+            {{#each data}}
+            <tr data-value={{this.id}}>
+                {{#each this}}
+                <td>{{this}}</td>
+                {{/each}}
+            <td><a onclick="Delete({{this.id}})" href="#">Delete</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <p>&nbsp;</p>
+
 <script src="./js/delete_customer.js"></script>

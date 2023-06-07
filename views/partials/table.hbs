@@ -13,7 +13,7 @@
     {{!-- Body section --}}
     <tbody>
         {{#each data}}
-        <tr>
+        <tr data-value={{this.id}}>
             {{#each this}}
             <td>{{this}}</td>
             {{/each}}

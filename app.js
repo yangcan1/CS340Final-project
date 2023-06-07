@@ -21,7 +21,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 
 /*
-    ROUTES
+    app.get() ROUTES (Successful!)
 */
 
 app.get('/', function(req, res)
@@ -43,6 +43,10 @@ app.get('/:i', function(req, res, next) {
         }) 
     } else next()
 })
+
+/*
+    Add ROUTES
+*/
 
 app.post('/addCar', function(req, res) 
 {
@@ -117,34 +121,57 @@ app.post('/addEmployee', function(req, res)
     })
 });
 
-app.delete('/deleteCar-ajax/', function(req,res,next){                                                                
+/*
+    Delete ROUTES
+*/
+
+// Delete Car (working!)
+app.delete('/delete-car-ajax/', function(req, res, next) {
     let data = req.body;
     let carID = parseInt(data.id);
-    let deleteInvoice = `DELETE FROM Invoice WHERE car_id = ?`;
-    //let deleteWaitlist = `DELETE FROM Waitlist where WHERE car_id = ?`;
-    let deleteCar= `DELETE FROM Car WHERE id = ?`;
-  
-  
-          // Run the 1st query
-          db.pool.query(deleteInvoice, [carID], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-              else {
-                db.pool.query(deleteCar, [carID], function(error, rows, fields) {
-                    if (error) {
-                        console.log(error);
-                        res.sendStatus(400);
-                    } 
-                    else {
-                        res.sendStatus(204);
-                    }
-                })
-              }
-  })});
+    let deleteCar = `DELETE FROM Car WHERE id = ?`;
+
+    db.pool.query(deleteCar, [carID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+
+// Delete Customer (working!)
+app.delete('/delete-customer-ajax/', function(req, res, next) {
+    let data = req.body;
+    let customerID = parseInt(data.id);
+    let deleteCustomer = `DELETE FROM Customer WHERE id = ?`;
+
+    db.pool.query(deleteCustomer, [customerID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+
+// Delete Employee (working!)
+app.delete('/delete-employee-ajax/', function(req, res, next) {
+    let data = req.body;
+    let employeeID = parseInt(data.id);
+    let deleteEmployee = `DELETE FROM Customer WHERE id = ?`;
+
+    db.pool.query(deleteEmployee, [employeeID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
 
   app.put('/updateCar-ajax', function(req,res,next){                                   
     let data = req.body;
