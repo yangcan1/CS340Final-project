@@ -33,4 +33,30 @@
         <p>&nbsp;</p>
         <!-- First Block -->
         <p><strong>Browse Invoice</strong></p>
-        {{>table}}
+
+        {{!-- Create a table --}}
+        <table border="1", cellpadding="5">
+            <thead>
+                <tr>
+                    {{#each data.[0]}}
+                    <th>
+                        {{@key}}
+                    </th>
+                    {{/each}}
+                </tr>
+            </thead>
+
+            {{!-- Body section --}}
+            <tbody>
+                {{#each data}}
+                <tr data-value={{this.id}}>
+                    {{#each this}}
+                    <td>{{this}}</td>
+                    {{/each}}
+                <td><a href="#">Update</a></td>
+                <td><a onclick="Delete({{this.id}})" href="#">Delete</a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+

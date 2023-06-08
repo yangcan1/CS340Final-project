@@ -34,13 +34,13 @@
 
 
         <!--update car -->
-        <div id="insert" style="display: block">
-            <!--<form id="addCar"> -->
-            <form id="updateCar">
+        <div id="updateCarTable" style="display: block">
+
+            <form id="updateCar" action = "/update-car" method="POST">
                 <legend><strong>Update Car</strong></legend>
                   <fieldset class="fields">
-                    <label for="select-id"> id </label> 
-                    <select name="select-id" id="mySelect">
+                    <label for="select_id"> id </label> 
+                    <select name="select_id" id="mySelect">
                       <option value="test">Select a car ID</option>
                       {{#each data}}
                       <option value="{{this.id}}">{{this.id}}</option>
@@ -55,7 +55,6 @@
                 </fieldset>
                   <input class="btn" type="submit" id="updateCar" value="Update Car">
             </form> 
-            <script src="./js/update_car.js"></script>
         </div><!-- insert -->
         <p>&nbsp;</p>
         

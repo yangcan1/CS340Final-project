@@ -21,7 +21,7 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 
 /*
-    app.get() ROUTES (Successful!)
+    Get Page ROUTES (Successful!)
 */
 
 app.get('/', function(req, res)
@@ -48,6 +48,7 @@ app.get('/:i', function(req, res, next) {
     Add ROUTES
 */
 
+// Add Car (working!)
 app.post('/addCar', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
@@ -73,6 +74,7 @@ app.post('/addCar', function(req, res)
     })
 });
 
+// Add Customer (working!)
 app.post('/addCustomer', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
@@ -98,6 +100,7 @@ app.post('/addCustomer', function(req, res)
     })
 });
 
+// Add Employee (working!)
 app.post('/addEmployee', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
@@ -178,163 +181,78 @@ app.delete('/delete-employee-ajax/', function(req, res, next) {
     Update ROUTES
 */
 
-// update Car
-app.put('/updateCar-ajax', function(req,res,next){                                   
+// update Car (working)
+app.post('/update-car', function(req,res, next){                                   
     let data = req.body;
+    let carID = parseInt(data.select_id);
+    let price = data.price;
+    let brand = data.brand;
+    let model = data.model;
+    let year = data.year;
+    let color = data.color;
   
-    //let homeworld = parseInt(data.homeworld);
-    //let Car = parseInt(data.fullname)``;
-  
-    queryUpdateCar = `UPDATE bsg_people SET homeworld = ? WHERE bsg_people.id = ?`;
-    selectCar = `SELECT * FROM Car WHERE id = ?`
-  
-          // Run the 1st query
-          db.pool.query(queryUpdateWorld, [homeworld, Car], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              // If there was no error, we run our second query and return that data so we can use it to update the people's
-              // table on the front-end
-              else
-              {
-                  // Run the second query
-                  db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
-          
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.send(rows);
-                      }
-                  })
-              }
-  })});
+    queryUpdateCar = `UPDATE Car SET Car.price = ?, Car.brand = ?, Car.model = ?, Car.year = ?, Car.color = ? WHERE Car.id = ? `; 
+    //queryUpdateCar = `UPDATE Car SET price = '${data['price']}', brand = '${data['brand']}', model = '${data['model']}', year = '${data['year']}', color = '${data['color']}' WHERE id = '${data['id']}'`; 
+        db.pool.query(queryUpdateCar, [price, brand, model, year, color, carID], function(error, rows, fields) {
+        //db.pool.query(queryUpdateCar, function(error, rows, fields) {
 
-// update customer
-  app.post('/update-customer', function (req, res, next) {
+            if (error) {
+                console.log(error);
+                res.sendStatus(400);
+            } else {
+                res.redirect('/Car');
+            }
+        })
+  }); 
+
+// update customer (working!)
+app.post('/update-cus', function(req,res, next){                                   
     let data = req.body;
-    let ID = parseInt(data.id_select);
-    let firstName = data.new_first_name;
-    let lastName = data.new_last_name;
-    let email = data.new_email;
-    let phone = data.new_phone;
-    let streetAddress = data.new_street_address;
-    let city = data.new_city;
-    let state = data.new_state;
-    let zip = data.new_zip;
-    let dentistID = data.new_dentist_id;
+    let cusID = parseInt(data.select_id);
+    let first_name = data.first_name;
+    let last_name = data.last_name;
+    let street = data.street;
+    let state = data.state;
+    let city = data.city;
+    let zip = data.zip;
+    let email = data.email;
+    let phone = data.phone;
+  
+    queryUpdateCar = `UPDATE Customer SET Customer.first_name = ?, Customer.last_name = ?, Customer.street = ?, Customer.state = ?, Customer.city = ?, Customer.zip = ?, Customer.email = ?, Customer.phone = ? WHERE Customer.id = ? `; 
+    //queryUpdateCar = `UPDATE Car SET price = '${data['price']}', brand = '${data['brand']}', model = '${data['model']}', year = '${data['year']}', color = '${data['color']}' WHERE id = '${data['id']}'`; 
+        db.pool.query(queryUpdateCar, [first_name, last_name, street, state, city, zip, email, phone, cusID], function(error, rows, fields) {
+        //db.pool.query(queryUpdateCar, function(error, rows, fields) {
 
-    let queryUpdateFirstName = `UPDATE Patients SET first_name = ? WHERE Patients.patient_ID = ?`;
-    let queryUpdateLastName = `UPDATE Patients SET last_name = ? WHERE Patients.patient_ID = ?`;
-    let queryUpdatePhone = `UPDATE Patients SET phone = ? WHERE Patients.patient_ID = ?`;
-    let queryUpdateEmail = `UPDATE Patients SET email = ? WHERE Patients.patient_ID = ?`;
-    let queryUpdateStreetAddress = `UPDATE Patients SET street_address = ? WHERE Patients.patient_ID = ?`;
-    let queryUpdateCity = `UPDATE Patients SET city = ? WHERE Patients.patient_ID = ?`;
-    let queryUpdateState = `UPDATE Patients SET state = ? WHERE Patients.patient_ID = ?`;
-    let queryUpdateZip = `UPDATE Patients SET zip = ? WHERE Patients.patient_ID = ?`;
-    let queryUpdateDentistID = `UPDATE Patients SET dentist_ID = ? WHERE Patients.patient_ID = ?`;
+            if (error) {
+                console.log(error);
+                res.sendStatus(400);
+            } else {
+                res.redirect('/Customer');
+            }
+        })
+});
 
-    // User hasn't selected a dentist to modify but clicked Submit.
-    // Code 204, shouldn't do anything or go anywhere
-    if (Number.isNaN(patientID)) {
-        res.sendStatus(204)
-    }
+// update Employee (working!)
+app.post('/update-employee', function(req,res, next){                                   
+    let data = req.body;
+    let employeeID = parseInt(data.select_id);
+    let first_name = data.first_name;
+    let last_name = data.last_name;
+    let sales = data.sales;
+  
+    queryUpdateCar = `UPDATE Employee SET Employee.first_name = ?, Employee.last_name = ?, Employee.sales = ? WHERE Employee.id = ? `; 
+    //queryUpdateCar = `UPDATE Car SET price = '${data['price']}', brand = '${data['brand']}', model = '${data['model']}', year = '${data['year']}', color = '${data['color']}' WHERE id = '${data['id']}'`; 
+        db.pool.query(queryUpdateCar, [first_name, last_name, sales, employeeID], function(error, rows, fields) {
+        //db.pool.query(queryUpdateCar, function(error, rows, fields) {
 
-    else {
-        // Run the 1st query
-        if (firstName != "") {
-            db.pool.query(queryUpdateFirstName, [firstName, patientID], function (error, rows, fields) {
-                if (error) {
-                    console.log(error)
-                    res.sendStatus(400);
-                }
-            })
-        }
-        // Run the 2nd query
-        if (lastName != "") {
-            db.pool.query(queryUpdateLastName, [lastName, patientID], function (error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400)
-                }
-            })
-        }
-        // Run the third query
-        if (phone != "") {
-            db.pool.query(queryUpdatePhone, [phone, patientID], function (error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400);
-                }
-            })
-        }
-        // Run the fourth query
-        if (email != "") {
-            db.pool.query(queryUpdateEmail, [email, patientID], function (error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400)
-                }
-            })
-        }
-
-        // Run the fifth query
-        if (streetAddress != "") {
-            db.pool.query(queryUpdateStreetAddress, [streetAddress, patientID], function (error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400)
-                }
-            })
-        }
-
-        // Run the sixth query
-        if (city != "") {
-            db.pool.query(queryUpdateCity, [city, patientID], function (error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400)
-                }
-            })
-        }
-
-        // Run the seventh query
-        if (state != "") {
-            db.pool.query(queryUpdateState, [state, patientID], function (error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400)
-                }
-            })
-        }
-
-        // Run the eighth query
-        if (zip != "") {
-            db.pool.query(queryUpdateZip, [zip, patientID], function (error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400)
-                }
-            })
-        }
-
-        // Run the ninth query
-        if (dentistID != "") {
-            db.pool.query(queryUpdateDentistID, [dentistID, patientID], function (error, rows, fields) {
-                if (error) {
-                    console.log(error);
-                    res.sendStatus(400)
-                }
-            })
-        }
-
-        return res.redirect("/patients")
-    }
-})
+            if (error) {
+                console.log(error);
+                res.sendStatus(400);
+            } else {
+                res.redirect('/Employee');
+            }
+        })
+});
 
 app.get('*', function (req, res) {
     res.status(404).render('404')

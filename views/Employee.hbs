@@ -28,15 +28,36 @@
                     <label> sales </label> <input type="text" name="sales">
                 </fieldset>
                   <input class="btn" type="submit" id="addEmployee" value="Add a Employee">
-                  <input class="btn" type="button" value="cancel">
             </form> <!--add new planet-->
         </div><!-- insert -->
 
         <p>&nbsp;</p>
-        
-        <p><strong>Browse Employee</strong></p>
+
+        <!--update car -->
+        <div id="updateEmployeeTable" style="display: block">
+
+            <form id="updateemployee" action = "/update-employee" method="POST">
+                <legend><strong>Update Employee</strong></legend>
+                  <fieldset class="fields">
+                    <label for="select_id"> id </label> 
+                    <select name="select_id" id="mySelect">
+                        <option value="test">Select a customer ID</option>
+                        {{#each data}}
+                        <option value="{{this.id}}">{{this.id}}</option>
+                        {{/each}}
+                    </select>
+                    <label> first_name </label> <input type="text" name="first_name">
+                    <label> last_name </label> <input type="text" name="last_name">
+                    <label> sales </label> <input type="text" name="sales">
+
+                </fieldset>
+                  <input class="btn" type="submit" id="updateCar" value="Update Car">
+            </form> 
+        </div>
+        <p>&nbsp;</p>
         
 
+        <p><strong>Browse Employee</strong></p>
         {{!-- Create a table --}}
         <table border="1", cellpadding="5" id = "employee-table">
             <thead>

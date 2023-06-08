@@ -34,32 +34,33 @@
         </div>
         <p>&nbsp;</p>
 
-        {{!-- Update --}}
-        <form id="update-customer-form-ajax">
+        <!--update car -->
+        <div id="updateCusTable" style="display: block">
 
-            <label for="input-fullname">Full name: </label>
-            <select name="input-fullname" id="mySelect">
-                <option value="test">Select a Person</option>
-                {{#each data}}
-                <option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
-                {{/each}}
-            </select>
+            <form id="updateCus" action = "/update-cus" method="POST">
+                <legend><strong>Update Customer</strong></legend>
+                  <fieldset class="fields">
+                    <label for="select_id"> id </label> 
+                    <select name="select_id" id="mySelect">
+                        <option value="test">Select a customer ID</option>
+                        {{#each data}}
+                        <option value="{{this.id}}">{{this.id}}</option>
+                        {{/each}}
+                    </select>
+                    <label> first_name </label> <input type="text" name="first_name">
+                    <label> last_name </label> <input type="text" name="last_name">
+                    <label> street </label> <input type="text" name="street">
+                    <label> zip </label> <input type="text" name="zip">
+                    <label> state </label> <input type="text" name="state">
+                    <label> city </label> <input type="text" name="city">
+                    <label> phone </label> <input type="text" name="phone">
+                    <label> email </label> <input type="text" name="email">
 
-            <label for="input-homeworld">Homeworld: </label>
-            <select name="input-homeworld" id="input-homeworld-update">
-                <option>Select a Planet</option>
-                {{#each planets}}
-                <option value="{{this.id}}">{{this.name}}</option>
-                {{/each}}
-            </select>
-            <input type="submit">
-
-        </form>
-
-        <script src="./js/update_person.js"></script>
-
-        
-
+                </fieldset>
+                  <input class="btn" type="submit" id="updateCar" value="Update Car">
+            </form> 
+        </div>
+    
         <p>&nbsp;</p>
 
 
