@@ -15,7 +15,7 @@ CREATE TABLE Customer (
 	phone varchar(20) default NULL,
 	email varchar(255) default NULL,
 	PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 CREATE TABLE Car (
 	id int NOT NULL AUTO_INCREMENT UNIQUE,
@@ -25,7 +25,7 @@ CREATE TABLE Car (
 	year int NOT NULL,
 	color varchar(255) NOT NULL, 
     PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 CREATE TABLE Employee (
 	id int NOT NULL AUTO_INCREMENT UNIQUE,
@@ -33,11 +33,11 @@ CREATE TABLE Employee (
 	last_name varchar(255) NOT NULL,
 	sales int NULL,
     PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 CREATE TABLE Invoice (
 	id int NOT NULL AUTO_INCREMENT UNIQUE,
-	date_sale date NOT NULL,
+	date_sale varchar(255) NOT NULL,
 	c_id int,
 	car_id int,
 	e_id int,
@@ -45,16 +45,17 @@ CREATE TABLE Invoice (
 	FOREIGN KEY(car_id) REFERENCES Car(id),
 	FOREIGN KEY(e_id) REFERENCES Employee(id),
     PRIMARY KEY(id)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 CREATE TABLE Waitlist (
+    id int NOT NULL AUTO_INCREMENT UNIQUE,
 	c_id int, 
 	car_id int, 
-	date_added date NOT NULL,
+	date_added varchar(255) NOT NULL,
 	FOREIGN KEY(c_id) REFERENCES Customer(id),
 	FOREIGN KEY(car_id) REFERENCES Car(id),
-	PRIMARY KEY(c_id, Car_id)
-);
+	PRIMARY KEY(id)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 INSERT INTO Customer (id, first_name, last_name, street, zip, state, city, phone, email)
 VALUES
@@ -89,9 +90,9 @@ VALUES
 ("2", "2023-08-09", (SELECT id FROM Customer WHERE id = "3"), (SELECT id FROM Car WHERE id = "2"), (SELECT id FROM Employee WHERE id = "2")),
 ("3", "2023-08-09", (SELECT id FROM Customer WHERE id = "1"), (SELECT id FROM Car WHERE id = "1"), (SELECT id FROM Employee WHERE id = "4"));
 
-INSERT INTO Waitlist (c_id, car_id, date_added)
+INSERT INTO Waitlist (id, c_id, car_id, date_added)
 VALUES
-((SELECT id FROM Customer WHERE id = 1), (SELECT id FROM Car WHERE id = 1), '2023-01-23'),
-((SELECT id FROM Customer WHERE id = 2), (SELECT id FROM Car WHERE id = 2), '2023-02-11'),
-((SELECT id FROM Customer WHERE id = 4), (SELECT id FROM Car WHERE id = 3), '2023-02-10');
+(1, (SELECT id FROM Customer WHERE id = 1), (SELECT id FROM Car WHERE id = 1), '2022-06-03 22:49:54'),
+(2, (SELECT id FROM Customer WHERE id = 2), (SELECT id FROM Car WHERE id = 2), '2023-06-07 12:30:05'),
+(3, (SELECT id FROM Customer WHERE id = 4), (SELECT id FROM Car WHERE id = 3), '2023-04-28 15:40:42');
 

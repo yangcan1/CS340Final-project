@@ -80,8 +80,6 @@ app.post('/addCustomer', function(req, res)
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    let id = parseInt(data.id);
-
     // Create the query and run it on the database
     query1 = `INSERT INTO Customer (first_name, last_name, street, zip, state, city, phone, email) VALUES ('${data['first_name']}', '${data['last_name']}', '${data['street']}', ${data['zip']}, '${data['state']}', '${data['city']}', '${data['phone']}', '${data['email']}')`;
     db.pool.query(query1, function(error, rows, fields){
@@ -120,6 +118,37 @@ app.post('/addEmployee', function(req, res)
         else
         {
             res.redirect('/Employee');
+        }
+    })
+});
+
+// Add Waitlist (working)
+app.post('/addWaitlist', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    var date = new Date();
+	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+	var date_time = current_date+" "+current_time;	
+    // console.log(date_time);
+
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Waitlist (c_id, car_id, date_added) VALUES ('${data['cID']}', '${data['carID']}', '${date_time}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.redirect('/Waitlist');
         }
     })
 });
@@ -168,6 +197,22 @@ app.delete('/delete-employee-ajax/', function(req, res, next) {
     let deleteEmployee = `DELETE FROM Customer WHERE id = ?`;
 
     db.pool.query(deleteEmployee, [employeeID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+
+// Delete Waitlist (working!)
+app.delete('/delete-waitlist-ajax/', function(req, res, next) {
+    let data = req.body;
+    let waitlistID = parseInt(data.id);
+    let deleteWaitlist = `DELETE FROM Waitlist WHERE id = ?`;
+
+    db.pool.query(deleteWaitlist, [waitlistID], function(error, rows, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -250,6 +295,33 @@ app.post('/update-employee', function(req,res, next){
                 res.sendStatus(400);
             } else {
                 res.redirect('/Employee');
+            }
+        })
+});
+
+// update Waitlist (working!)
+app.post('/update-waitlist', function(req,res, next){                                   
+    let data = req.body;
+    let waitlistID = parseInt(data.select_id);
+    let c_id = data.c_id;
+    let car_id = data.car_id;
+
+    var date = new Date();
+	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+	var date_time = current_date+" "+current_time;	
+    console.log(date_time);
+  
+    queryUpdateCar = `UPDATE Waitlist SET Waitlist.c_id = ?, Waitlist.car_id = ?, Waitlist.date_added = ? WHERE Waitlist.id = ? `; 
+    //queryUpdateCar = `UPDATE Car SET price = '${data['price']}', brand = '${data['brand']}', model = '${data['model']}', year = '${data['year']}', color = '${data['color']}' WHERE id = '${data['id']}'`; 
+        db.pool.query(queryUpdateCar, [c_id, car_id, date_time, waitlistID], function(error, rows, fields) {
+        //db.pool.query(queryUpdateCar, function(error, rows, fields) {
+
+            if (error) {
+                console.log(error);
+                res.sendStatus(400);
+            } else {
+                res.redirect('/Waitlist');
             }
         })
 });

@@ -9,13 +9,11 @@
         <a href="/Waitlist">Waitlist</a>
     </nav>
 
-    <div id="browse" style="display: block">
         
         
-        <p>&nbsp;</p>
+        {{!-- <p>&nbsp;</p> --}}
 
-        </div> <!-- browse -->
-        <div id="insert" style="display: block">
+        {{!-- <div id="insert" style="display: block">
             <form id="addUser">
                 <legend><strong>Add Invoice</strong></legend>
                   <fieldset class="fields">
@@ -27,12 +25,13 @@
                 </fieldset>
                   <input class="btn" type="submit" id="addInvoice" value="Add a Invoice">
                   <input class="btn" type="button" value="cancel">
-            </form> <!--add new planet-->
-        </div><!-- insert -->
+            </form>
+        </div> --}}
         
         <p>&nbsp;</p>
         <!-- First Block -->
         <p><strong>Browse Invoice</strong></p>
+        <p2>Here are all transaction records.</p2>
 
         {{!-- Create a table --}}
         <table border="1", cellpadding="5">
@@ -53,8 +52,6 @@
                     {{#each this}}
                     <td>{{this}}</td>
                     {{/each}}
-                <td><a href="#">Update</a></td>
-                <td><a onclick="Delete({{this.id}})" href="#">Delete</a></td>
                 </tr>
                 {{/each}}
             </tbody>
