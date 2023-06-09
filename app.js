@@ -10,11 +10,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 
-<<<<<<< HEAD
+//PORT = 5049;
+
 PORT = 5080;
-=======
-PORT = 5049;
->>>>>>> be6fe63090f62408e5238b84e1498b20cc8663f3
 
 // Database
 var db = require('./database/db-connector');
