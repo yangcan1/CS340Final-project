@@ -10,9 +10,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 
-//PORT = 5049;
+PORT = 5049;
 
-PORT = 5080;
+// PORT = 5080;
 
 // Database
 var db = require('./database/db-connector');
@@ -163,50 +163,108 @@ app.post('/addWaitlist', function(req, res)
 app.delete('/delete-car-ajax/', function(req, res, next) {
     let data = req.body;
     let carID = parseInt(data.id);
+    let deleteInvoice = `DELETE FROM Invoice WHERE car_id = ?`;
+    let deleteWaitlist = `DELETE FROM Waitlist WHERE car_id = ?`;
     let deleteCar = `DELETE FROM Car WHERE id = ?`;
-    let deleteInvoice
 
-    db.pool.query(deleteCar, [carID], function(error, rows, fields) {
+    // run the first query
+    db.pool.query(deleteInvoice, [carID], function(error, rows, fields){
         if (error) {
-            console.log(error);
-            res.sendStatus(400);
-        } else {
-            res.sendStatus(204);
+
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
         }
-    });
-});
+
+        else
+        {
+            // Run the second query
+            db.pool.query(deleteWaitlist, [carID], function(error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    db.pool.query(deleteCar, [carID], function(error, rows, fields) {
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        }
+                        // res.sendStatus(204);
+
+                    })
+                }
+                res.sendStatus(204);
+
+            })
+        }
+})});
+
 
 // Delete Customer (working!)
 app.delete('/delete-customer-ajax/', function(req, res, next) {
     let data = req.body;
     let customerID = parseInt(data.id);
     let deleteCustomer = `DELETE FROM Customer WHERE id = ?`;
+    let deleteWaitlist = `DELETE FROM Waitlist WHERE c_id = ?`;
+    let deleteInvoice = `DELETE FROM Invoice WHERE c_id = ?`;
 
-    db.pool.query(deleteCustomer, [customerID], function(error, rows, fields) {
+    // run the first query
+    db.pool.query(deleteInvoice, [customerID], function(error, rows, fields){
         if (error) {
-            console.log(error);
-            res.sendStatus(400);
+
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
         } else {
-            res.sendStatus(204);
+            // Run the second query
+            db.pool.query(deleteWaitlist, [customerID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    // run the third query
+                    db.pool.query(deleteCustomer, [customerID], function(error, rows, fields) {
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        }
+                        // res.sendStatus(204);
+
+                    })
+                }
+                res.sendStatus(204);
+
+            })
         }
-    });
-});
+})});
 
 // Delete Employee (working!)
 app.delete('/delete-employee-ajax/', function(req, res, next) {
     let data = req.body;
     let employeeID = parseInt(data.id);
-    let deleteEmployee = `DELETE FROM Customer WHERE id = ?`;
+    let deleteEmployee = `DELETE FROM Employee WHERE id = ?`;
+    let deleteInvoice = `DELETE FROM Invoice WHERE e_id = ?`;
 
-    db.pool.query(deleteEmployee, [employeeID], function(error, rows, fields) {
+    db.pool.query(deleteInvoice, [employeeID], function(error, rows, fields){
         if (error) {
-            console.log(error);
-            res.sendStatus(400);
+
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
         } else {
-            res.sendStatus(204);
+            // Run the second query
+            db.pool.query(deleteEmployee, [employeeID], function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                res.sendStatus(204);
+            })
+
         }
-    });
-});
+})});
+
 
 // Delete Waitlist (working!)
 app.delete('/delete-waitlist-ajax/', function(req, res, next) {
@@ -215,6 +273,22 @@ app.delete('/delete-waitlist-ajax/', function(req, res, next) {
     let deleteWaitlist = `DELETE FROM Waitlist WHERE id = ?`;
 
     db.pool.query(deleteWaitlist, [waitlistID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+
+// Delete Invoice (working!)
+app.delete('/delete-invoice-ajax/', function(req, res, next) {
+    let data = req.body;
+    let invoiceID = parseInt(data.id);
+    let deleteInvoice = `DELETE FROM Invoice WHERE id = ?`;
+
+    db.pool.query(deleteInvoice, [invoiceID], function(error, rows, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -239,7 +313,9 @@ app.post('/update-car', function(req,res, next){
     let color = data.color;
   
     queryUpdateCar = `UPDATE Car SET Car.price = ?, Car.brand = ?, Car.model = ?, Car.year = ?, Car.color = ? WHERE Car.id = ? `; 
-    //queryUpdateCar = `UPDATE Car SET price = '${data['price']}', brand = '${data['brand']}', model = '${data['model']}', year = '${data['year']}', color = '${data['color']}' WHERE id = '${data['id']}'`; 
+    // queryUpdateWaitlist = `UPDATE Waitlist SET year = '${data['year']}', color = '${data['color']}' WHERE id = '${data['id']}'`; 
+    // queryUpdateInvoice = `UPDATE Invoice SET price = '${data['price']}', brand = '${data['brand']}', model = '${data['model']}', year = '${data['year']}', color = '${data['color']}' WHERE id = '${data['id']}'`; 
+
         db.pool.query(queryUpdateCar, [price, brand, model, year, color, carID], function(error, rows, fields) {
         //db.pool.query(queryUpdateCar, function(error, rows, fields) {
 
@@ -312,7 +388,6 @@ app.post('/update-waitlist', function(req,res, next){
 	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
 	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
 	var date_time = current_date+" "+current_time;	
-    console.log(date_time);
   
     queryUpdateCar = `UPDATE Waitlist SET Waitlist.c_id = ?, Waitlist.car_id = ?, Waitlist.date_added = ? WHERE Waitlist.id = ? `; 
     //queryUpdateCar = `UPDATE Car SET price = '${data['price']}', brand = '${data['brand']}', model = '${data['model']}', year = '${data['year']}', color = '${data['color']}' WHERE id = '${data['id']}'`; 
@@ -324,6 +399,33 @@ app.post('/update-waitlist', function(req,res, next){
                 res.sendStatus(400);
             } else {
                 res.redirect('/Waitlist');
+            }
+        })
+});
+
+// update Invoice (working!)
+app.post('/update-invoice', function(req,res, next){                                   
+    let data = req.body;
+    let invoiceID = parseInt(data.select_id);
+    let c_id = data.c_id;
+    let car_id = data.car_id;
+    let e_id = data.e_id;
+
+    var date = new Date();
+	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+	var date_time = current_date+" "+current_time;	
+  
+    queryUpdateCar = `UPDATE Invoice SET Invoice.c_id = ?, Invoice.car_id = ?, Invoice.e_id = ?, Invoice.date_sale = ? WHERE Invoice.id = ? `; 
+    //queryUpdateCar = `UPDATE Car SET price = '${data['price']}', brand = '${data['brand']}', model = '${data['model']}', year = '${data['year']}', color = '${data['color']}' WHERE id = '${data['id']}'`; 
+        db.pool.query(queryUpdateCar, [c_id, car_id, e_id, date_time, invoiceID], function(error, rows, fields) {
+        //db.pool.query(queryUpdateCar, function(error, rows, fields) {
+
+            if (error) {
+                console.log(error);
+                res.sendStatus(400);
+            } else {
+                res.redirect('/Invoice');
             }
         })
 });

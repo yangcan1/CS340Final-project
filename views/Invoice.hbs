@@ -11,22 +11,31 @@
 
         
         
-        {{!-- <p>&nbsp;</p> --}}
+        <p>&nbsp;</p>
 
-        {{!-- <div id="insert" style="display: block">
-            <form id="addUser">
-                <legend><strong>Add Invoice</strong></legend>
-                  <fieldset class="fields">
-                    <label> id </label> <input type="text" name="id">
-                    <label> date_sale </label> <input type="text" name="dateSale">
-                    <label> c_id </label> <input type="text" name="cID">
-                    <label> car_id </label> <input type="text" name="carID">
-                    <label> e_id </label> <input type="text" name="eID">
-                </fieldset>
-                  <input class="btn" type="submit" id="addInvoice" value="Add a Invoice">
-                  <input class="btn" type="button" value="cancel">
-            </form>
-        </div> --}}
+    <!--update car -->
+    <div id="updateInvoiceTable" style="display: block">
+
+        <form id="updateinvoice" action = "/update-invoice" method="POST">
+            <legend><strong>Update Invoice (c_id -> customer_id,  e_id -> employee_id)</strong></legend>
+                <fieldset class="fields">
+                <label for="select_id"> id </label> 
+                <select name="select_id" id="mySelect">
+                    <option value="test">Select a invoice ID</option>
+                    {{#each data}}
+                    <option value="{{this.id}}">{{this.id}}</option>
+                    {{/each}}
+                </select>
+                <label> c_id </label> <input type="text" name="c_id">
+                <label> car_id </label> <input type="text" name="car_id">
+                <label> e_id </label> <input type="text" name="e_id">
+                <label> date_sale (will be applied by current time) </label>
+
+            </fieldset>
+                <input class="btn" type="submit" id="updateInvoice" value="Update Invoice">
+        </form> 
+
+    </div>
         
         <p>&nbsp;</p>
         <!-- First Block -->
@@ -34,7 +43,7 @@
         <p2>Here are all transaction records.</p2>
 
         {{!-- Create a table --}}
-        <table border="1", cellpadding="5">
+        <table border="1", cellpadding="5" id = "invoice-table">
             <thead>
                 <tr>
                     {{#each data.[0]}}
@@ -52,8 +61,10 @@
                     {{#each this}}
                     <td>{{this}}</td>
                     {{/each}}
+                    <td><a onclick="Delete({{this.id}})" href="#">Delete</a></td>
                 </tr>
                 {{/each}}
             </tbody>
         </table>
 
+<script src="./js/delete_invoice.js"></script>
