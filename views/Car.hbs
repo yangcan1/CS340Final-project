@@ -60,6 +60,13 @@
         
         <p><strong>Browse Cars</strong></p>
         <p2>This is our inventory. We listed all cars that are avaliable in our storage.</p2>
+        <p>&nbsp;</p>
+
+
+        <div class="table_filter">
+            <input type="text" id="table_filter" onkeyup="myFunction()" placeholder="Search for brand..">
+
+        </div>
 
         {{!-- Create a table --}}
         <table border="1", cellpadding="5" id = "car-table">
@@ -86,7 +93,27 @@
             </tbody>
         </table>
 
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("table_filter");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("car-table");
+  tr = table.getElementsByTagName("tr");
 
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2]; 
+
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 
 
 </body>

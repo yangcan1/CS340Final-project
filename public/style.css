@@ -28,3 +28,77 @@ table {
 	padding: 0.4em;
 	caption-side: bottom;
 }
+
+.table_filter {
+    width: 100%; /* Full-width */
+
+}
+#table_filter {
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 0px 12px 0px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+  
+
+#sell-something-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1010;
+    overflow: scroll;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-dialog {
+    width: auto;
+    max-width: 600px;
+    min-width: 350px;
+    min-height: 300px;
+    margin: 40px auto;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.modal-header {
+    position: relative;
+    padding: 10px 20px;
+}
+  
+.modal-header h3 {
+    margin: 0;
+    font-size: 28px;
+}
+  
+#modal-close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 10px 20px 10px;
+}  
+
+#modal-cancel {
+    color: #333;
+    background-color: #fff;
+}
+
+#modal-cancel:hover {
+    background-color: #eee;
+}
+  

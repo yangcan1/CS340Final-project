@@ -155,6 +155,37 @@ app.post('/addWaitlist', function(req, res)
     })
 });
 
+// Add Invoice
+// app.post('/addInvoice', function(req, res) 
+// {
+//     // Capture the incoming data and parse it back to a JS object
+//     let data = req.body;
+
+//     var date = new Date();
+// 	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+// 	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+// 	var date_time = current_date+" "+current_time;	
+//     // console.log(date_time);
+
+
+//     // Create the query and run it on the database
+//     query1 = `INSERT INTO Waitlist (c_id, car_id, date_added) VALUES ('${data['cID']}', '${data['carID']}', '${date_time}')`;
+//     db.pool.query(query1, function(error, rows, fields){
+
+//         // Check to see if there was an error
+//         if (error) {
+
+//             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+//             console.log(error)
+//             res.sendStatus(400);
+//         }
+//         else
+//         {
+//             res.redirect('/Waitlist');
+//         }
+//     })
+// });
+
 /*
     Delete ROUTES
 */

@@ -96,3 +96,13 @@ VALUES
 (2, (SELECT id FROM Customer WHERE id = 2), (SELECT id FROM Car WHERE id = 2), '2023-06-07 12:30:05'),
 (3, (SELECT id FROM Customer WHERE id = 4), (SELECT id FROM Car WHERE id = 3), '2023-04-28 15:40:42');
 
+
+DELIMITER //
+
+Create Trigger before_insert_Employee BEFORE INSERT ON Employee FOR EACH ROW
+BEGIN
+    IF NEW.sales < 0 THEN SET NEW.sales = 0;
+    END IF;
+    END //
+
+DELIMITER ;
