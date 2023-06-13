@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 
-PORT = 5049;
+PORT = 5050;
 
 // PORT = 5080;
 
@@ -155,36 +155,36 @@ app.post('/addWaitlist', function(req, res)
     })
 });
 
-// Add Invoice
-// app.post('/addInvoice', function(req, res) 
-// {
-//     // Capture the incoming data and parse it back to a JS object
-//     let data = req.body;
+// Add Waitlist (working)
+app.post('/addInvoice', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
 
-//     var date = new Date();
-// 	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
-// 	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
-// 	var date_time = current_date+" "+current_time;	
-//     // console.log(date_time);
+    var date = new Date();
+	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+	var date_time = current_date+" "+current_time;	
+    // console.log(date_time);
 
 
-//     // Create the query and run it on the database
-//     query1 = `INSERT INTO Waitlist (c_id, car_id, date_added) VALUES ('${data['cID']}', '${data['carID']}', '${date_time}')`;
-//     db.pool.query(query1, function(error, rows, fields){
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Invoice (c_id, car_id, e_id, date_sale) VALUES ('${data['cID']}', '${data['carID']}', '${data['eID']}', '${date_time}')`;
+    db.pool.query(query1, function(error, rows, fields){
 
-//         // Check to see if there was an error
-//         if (error) {
+        // Check to see if there was an error
+        if (error) {
 
-//             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-//             console.log(error)
-//             res.sendStatus(400);
-//         }
-//         else
-//         {
-//             res.redirect('/Waitlist');
-//         }
-//     })
-// });
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.redirect('/Invoice');
+        }
+    })
+});
 
 /*
     Delete ROUTES

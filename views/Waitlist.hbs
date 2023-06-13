@@ -13,6 +13,7 @@
     <div id="browse" style="display: block">
         
         <p>&nbsp;</p>
+        <p>&nbsp;</p>
 
         </div> <!-- browse -->
         <div id="insertwaitlist" style="display: block">
@@ -73,142 +74,10 @@
                     <td>{{this}}</td>
                     {{/each}}
                     <td><a onclick="Delete({{this.id}})" href="#">Delete</a></td>
-                    <td><a id="confirm-button"  href="#">Confirmed</a></td>
                 </tr>
                 {{/each}}
             </tbody>
         </table>
 
-    
-    <div id="modal-backdrop" class="hidden"></div>
-    <div id="confirmation-modal" class="hidden">
-      <div class="modal-dialog">
-
-        <div class="modal-header">
-          <h3>Buying a car</h3>
-          <button type="button" id="modal-close" class="modal-hide-button">&times;</button>
-        </div>
-
-        <div class="modal-body">
-
-          <div class="post-cusID-element">
-            <label for="post-cID-input">customer id</label>
-            <input type="text" id="post-text-input"></input>
-          </div>
-
-          <div class="post-carID-element">
-            <label for="post-photo-input">car id</label>
-            <input type="text" id="post-photo-input">
-          </div>
-
-          <div class="post-eID-element">
-            <label for="post-price-input">employee id </label>
-            <input type="number" id="post-price-input">
-          </div>
-
-
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" id="modal-cancel" class="modal-hide-button action-button">Cancel</button>
-          <button type="button" id="modal-accept" class="action-button">Confirmed</button>
-        </div>
-
-      </div>
-    </div>
-
-<script>
-    var modalClose = document.getElementById("modal-close")
-    var modalBackdrop = document.getElementById("modal-backdrop")
-    var modalCancle = document.getElementById("modal-cancel")
-    var confirmButton = decodeURIComponent.getElementById("confirm-button")
-
-    function toggleModal () {
-        confirmButton.classList.toggle("hidden")
-        modalBackdrop.classList.toggle("hidden")
-
-    }
-
-    modalClose.addEventListener('click', toggleModal)
-
-</script>
-
-
-
-
 <script src="./js/delete_waitlist.js"></script>
 
-<script>
-    
-    
-    function toggleeid() {
-        var toggleEid = document.getElementById("confirmation-modal")
-        if (toggleEid.style.display === "none") {
-            toggleEid.style.display = "block";
-        } else {
-            toggleEid.style.display = "none";
-        }
-    }
-
-
-</script>
-
-{{!-- <script>
-  function showConfirmationModal(waitlistID) {
-    // Show the confirmation modal
-    $('#confirmation-modal').show();
-
-    // Store the waitlist ID in a data attribute
-    $('#confirmation-modal').data('waitlist-id', waitlistID);
-  }
-
-  $('#confirm-button').click(function() {
-    // Get the waitlist ID from the data attribute
-    const waitlistID = $('#confirmation-modal').data('waitlist-id');
-
-    // Get the employee ID from the input field
-    const employeeID = $('#employee-id').val();
-
-    if (!employeeID) {
-      // Employee ID is empty, display an error message or take appropriate action
-      console.log("Employee ID is required.");
-      return;
-    }
-
-    // Send the data to the server for processing
-    const data = {
-      waitlistID: waitlistID,
-      employeeID: employeeID
-    };
-
-    $.ajax({
-      url: '/confirm-booking-ajax',
-      type: 'POST',
-      data: JSON.stringify(data),
-      contentType: 'application/json',
-      success: function(response) {
-        console.log("Booking confirmed successfully!");
-
-        // Delete the row from the waitlist table
-        deleteRow(waitlistID);
-      },
-      error: function(xhr, status, error) {
-        console.log("Error confirming booking:", error);
-      }
-    });
-
-    // Hide the confirmation modal
-    $('#confirmation-modal').hide();
-  });
-
-  function deleteRow(waitlistID) {
-    let table = document.getElementById("waitlist-table");
-    for (let i = 0; i < table.rows.length; i++) {
-      let row = table.rows[i];
-      if (row.getAttribute("data-value") == waitlistID) {
-        table.deleteRow(i);
-        break;
-      }
-    }
-  }
-</script> --}}

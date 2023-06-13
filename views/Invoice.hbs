@@ -10,7 +10,24 @@
     </nav>
 
         
-        
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+
+        {{!-- Insert --}}
+        </div> <!-- browse -->
+        <div id="insertinvoice" style="display: block">
+            <form id="addInvoice" method="POST" action="/addInvoice">
+                <legend><strong>Add Invoice (c_id -> customer_id)<strong></legend>
+                  <fieldset class="fields">
+                    <label> c_id </label> <input type="text" name="cID">
+                    <label> car_id </label> <input type="text" name="carID">
+                    <label> e_id </label> <input type="text" name="eID">
+                    <label> date_sale (will be applied by current time) </label>
+                </fieldset>
+                  <input class="btn" type="submit" id="addInvoice" value="Add a Invoice">
+            </form> <!--add new planet-->
+        </div><!-- insert -->
+
         <p>&nbsp;</p>
 
     <!--update car -->
