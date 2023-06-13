@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 
-PORT = 5050;
+PORT = 5051;
 
 // PORT = 5080;
 
